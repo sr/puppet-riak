@@ -1,29 +1,29 @@
 class riak {
   require riak::config
 
-  $version = '1.1.2-x86_64-github1'
+  $version = '1.1.2-x86_64-boxen1'
 
-  package { 'github/brews/riak':
+  package { 'boxen/brews/riak':
     ensure => $version,
-#    notify => Service['com.github.riak']
+#    notify => Service['com.boxen.riak']
   }
 
-  # service { 'com.github.riak':
-  #   ensure  => running,
-  #   require => Package['github/brews/riak']
+  # FIXME: re-enable service
+  # service { 'com.boxen.riak':
+  #   ensure  => running
   # }
 
 
-  file { "${github::config::envdir}/riak.sh":
+  file { "${boxen::config::envdir}/riak.sh":
     content => template('riak/env.sh.erb'),
-    require => File[$github::config::envdir]
+    require => File[$boxen::config::envdir]
   }
 
-  file { "${github::config::homebrewdir}/Cellar/riak/${version}/libexec/etc/app.config":
+  file { "${boxen::config::homebrewdir}/Cellar/riak/${version}/libexec/etc/app.config":
     ensure  => link,
     force   => true,
     target  => "${riak::config::configdir}/app.config",
-    require => [Package['github/brews/riak'],
+    require => [Package['boxen/brews/riak'],
       File["${riak::config::configdir}/app.config"]]
   }
 }

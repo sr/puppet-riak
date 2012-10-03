@@ -1,10 +1,10 @@
 class riak::config {
-  require github::config
+  require boxen::config
 
-  $configdir  = "${github::config::configdir}/riak"
-  $datadir    = "${github::config::datadir}/riak"
-  $executable = "${github::config::home}/homebrew/bin/riak"
-  $logdir     = "${github::config::logdir}/riak"
+  $configdir  = "${boxen::config::configdir}/riak"
+  $datadir    = "${boxen::config::datadir}/riak"
+  $executable = "${boxen::config::home}/homebrew/bin/riak"
+  $logdir     = "${boxen::config::logdir}/riak"
   $port       = 18098
 
   file { [$configdir, $datadir, $logdir]:
@@ -13,13 +13,13 @@ class riak::config {
 
   file { "${configdir}/app.config":
     content => template('riak/app.config.erb'),
-#    notify  => Service['com.github.riak']
+#    notify  => Service['com.boxen.riak']
   }
 
-  file { '/Library/LaunchDaemons/com.github.riak.plist':
-    content => template('riak/com.github.riak.plist.erb'),
+  file { '/Library/LaunchDaemons/com.boxen.riak.plist':
+    content => template('riak/com.boxen.riak.plist.erb'),
     group   => 'wheel',
     owner   => 'root',
-#    notify  => Service['com.github.riak']
+#    notify  => Service['com.boxen.riak']
   }
 }
