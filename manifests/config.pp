@@ -1,3 +1,6 @@
+# Configuration for Riak.
+#
+# Include riak instead of this class.
 class riak::config {
   require boxen::config
 

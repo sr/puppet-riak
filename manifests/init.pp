@@ -1,3 +1,8 @@
+# Installs custom Riak from homebrew. Auto-requires riak::config.
+#
+# Usage:
+#
+#     include riak
 class riak {
   require riak::config
 
