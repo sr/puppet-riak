@@ -16,13 +16,13 @@ class riak::config {
 
   file { "${configdir}/app.config":
     content => template('riak/app.config.erb'),
-#    notify  => Service['com.boxen.riak']
+#    notify  => Service['dev.riak']
   }
 
-  file { '/Library/LaunchDaemons/com.boxen.riak.plist':
-    content => template('riak/com.boxen.riak.plist.erb'),
+  file { '/Library/LaunchDaemons/dev.riak.plist':
+    content => template('riak/dev.riak.plist.erb'),
     group   => 'wheel',
     owner   => 'root',
-#    notify  => Service['com.boxen.riak']
+#    notify  => Service['dev.riak']
   }
 }
