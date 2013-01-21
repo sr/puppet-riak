@@ -14,7 +14,7 @@ describe 'riak' do
       with_ensure('1.1.2-x86_64-boxen1')
 
     should_not contain_package('boxen/brews/riak').
-      with_notify('Service[com.boxen.riak]')
+      with_notify('Service[dev.riak]')
 
     should contain_file('/opt/boxen/env.d/riak.sh').with({
       :content => File.read('spec/fixtures/riak.sh'),

@@ -10,14 +10,18 @@ class riak {
 
   package { 'boxen/brews/riak':
     ensure => $version,
-#    notify => Service['com.boxen.riak']
+    notify => Service['dev.riak']
   }
 
-  # FIXME: re-enable service
-  # service { 'com.boxen.riak':
-  #   ensure  => running
-  # }
+  service { 'dev.riak':
+    ensure  => 'stopped',
+    require => Package['boxen/brews/riak']
+  }
 
+  service { 'com.boxen.riak': # replaced by dev.riak
+    before => Service['dev.riak'],
+    enable => false
+  }
 
   file { "${boxen::config::envdir}/riak.sh":
     content => template('riak/env.sh.erb'),

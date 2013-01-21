@@ -18,13 +18,13 @@ describe 'riak::config' do
     should contain_file("#{boxen_home}/log/riak").with_ensure('directory')
 
     should contain_file("#{configdir}/app.config").with_content(File.read("spec/fixtures/app.config"))
-    should_not contain_file("#{configdir}/app.config").with_notify('Service[com.boxen.riak]')
+    should_not contain_file("#{configdir}/app.config").with_notify('Service[dev.riak]')
 
-    should contain_file('/Library/LaunchDaemons/com.boxen.riak.plist').with({
+    should contain_file('/Library/LaunchDaemons/dev.riak.plist').with({
       :content => File.read('spec/fixtures/riak.plist'),
       :group   => 'wheel',
       :owner   => 'root'
     })
-    should_not contain_file('/Library/LaunchDaemons/com.boxen.riak.plist').with_notify('Service[com.boxen.riak]')
+    should_not contain_file('/Library/LaunchDaemons/dev.riak.plist').with_notify('Service[dev.riak]')
   end
 end
