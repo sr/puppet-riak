@@ -9,20 +9,5 @@ class riak::config {
   $executable = "${boxen::config::home}/homebrew/bin/riak"
   $logdir     = "${boxen::config::logdir}/riak"
   $port       = 18098
-
-  file { [$configdir, $datadir, $logdir]:
-    ensure => directory
-  }
-
-  file { "${configdir}/app.config":
-    content => template('riak/app.config.erb'),
-#    notify  => Service['dev.riak']
-  }
-
-  file { '/Library/LaunchDaemons/dev.riak.plist':
-    content => template('riak/dev.riak.plist.erb'),
-    group   => 'wheel',
-    owner   => 'root',
-#    notify  => Service['dev.riak']
-  }
+  $version    = '1.2.1-x86_64-boxen1'
 }

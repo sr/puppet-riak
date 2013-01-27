@@ -5,11 +5,34 @@
 #     include riak
 class riak {
   require riak::config
+  require homebrew
 
-  $version = '1.1.2-x86_64-boxen1'
+  file { [
+    $riak::config::configdir,
+    $riak::config::datadir,
+    $riak::config::logdir
+  ]:
+    ensure => directory
+  }
+
+  file { "${riak::config::configdir}/app.config":
+    content => template('riak/app.config.erb'),
+  #    notify  => Service['dev.riak']
+  }
+
+  file { '/Library/LaunchDaemons/dev.riak.plist':
+    content => template('riak/dev.riak.plist.erb'),
+    group   => 'wheel',
+    owner   => 'root',
+  #    notify  => Service['dev.riak']
+  }
+
+  homebrew::formula { 'riak':
+    before => Package['boxen/brews/riak']
+  }
 
   package { 'boxen/brews/riak':
-    ensure => $version,
+    ensure => $riak::config::version,
     notify => Service['dev.riak']
   }
 
@@ -28,7 +51,7 @@ class riak {
     require => File[$boxen::config::envdir]
   }
 
-  file { "${boxen::config::homebrewdir}/Cellar/riak/${version}/libexec/etc/app.config":
+  file { "${boxen::config::homebrewdir}/Cellar/riak/${riak::config::version}/libexec/etc/app.config":
     ensure  => link,
     force   => true,
     target  => "${riak::config::configdir}/app.config",
