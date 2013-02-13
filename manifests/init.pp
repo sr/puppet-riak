@@ -4,8 +4,8 @@
 #
 #     include riak
 class riak {
-  require riak::config
-  require homebrew
+  include riak::config
+  include homebrew
 
   file { [
     $riak::config::configdir,

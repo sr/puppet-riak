@@ -1,12 +1,13 @@
 # Riak Puppet Module for Boxen
 
-Requires the following boxen modules:
-
-* `boxen`
-* `homebrew`
-
 ## Usage
 
 ```puppet
 include riak
 ```
+
+## Required Puppet Modules
+
+* `boxen`
+* `homebrew`
+* `stdlib`
