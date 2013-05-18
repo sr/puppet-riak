@@ -9,5 +9,6 @@ class riak::config {
   $executable = "${boxen::config::home}/homebrew/bin/riak"
   $logdir     = "${boxen::config::logdir}/riak"
   $port       = 18098
+  $pb_port    = 18097
   $version    = '1.2.1-x86_64-boxen1'
 }
