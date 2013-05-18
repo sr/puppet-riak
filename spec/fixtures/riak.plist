@@ -37,5 +37,11 @@
 
     <key>StandardOutPath</key>
     <string>/opt/boxen/log/riak/console.log</string>
+
+    <key>HardResourceLimits</key>
+    <dict>
+      <key>NumberOfFiles</key>
+      <integer>4096</integer>
+    </dict>
   </dict>
 </plist>
