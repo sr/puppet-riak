@@ -11,3 +11,4 @@ include riak
 * `boxen`
 * `homebrew`
 * `stdlib`
+* boom
